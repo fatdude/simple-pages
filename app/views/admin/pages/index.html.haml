@@ -1,0 +1,38 @@
+.page-header
+  %h1 Pages
+
+= render 'layouts/admin/nav'
+
+%ol.nested-sortable
+  = nested_pages @pages
+
+.form-actions
+  = link_to 'Save positions', '#', class: 'btn btn-primary save-positions'
+
+- if false
+  %table.table.table-striped
+    %thead
+      %tr
+        %th ID
+        %th Title
+        %th Link
+        %th Url
+        %th Ancestry
+        %th Display in menu
+        %th Status
+        %th Actions
+    %tbody
+      - @pages.each do |page|
+        %tr
+          %td= page.id
+          %td= page.title
+          %td= page.link
+          %td= page.url
+          %td= page.ancestry
+          %td= page.display_in_menu
+          %td= page.status
+          %td
+            = link_to 'Add child', new_admin_page_page_path(page), class: 'btn btn-mini'
+            = link_to 'Show', [:admin, page], class: 'btn btn-mini'
+            = link_to 'Edit', edit_admin_page_path(page), class: 'btn btn-mini'
+            = link_to 'Destroy', [:admin, page], confirm: 'Are you sure?', method: :delete, class: 'btn btn-mini btn-danger'

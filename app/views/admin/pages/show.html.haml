@@ -1,0 +1,31 @@
+.page-header
+  %h1 Page details
+
+= render 'layouts/admin/nav'
+
+%label.label Name
+%p= @page.name
+%label.label Title
+%p= @page.title
+%label.label Link text
+%p= @page.link
+%label.label Url
+%p= @page.url
+%label.label Display in menu
+%p= yes_or_no(@page.display_in_menu)
+%label.label Status
+%p= Page.statuses[@page.status]
+
+%ul.nav.nav-tabs
+  - @page.page_parts.each do |page_part|
+    %li{ class: ('active' if page_part == @page.page_parts.first) }
+      = link_to page_part.name, "##{page_part.name.parameterize}", 'data-toggle' => 'tab'
+
+.tab-content
+  - @page.page_parts.each do |page_part|
+    .tab-pane.fade{ id: "#{page_part.name.parameterize}", class: ('active in' if @page.page_parts.first == page_part) }
+      = textilize page_part.content
+
+.form-actions
+  = link_to 'Edit', edit_admin_page_path(@page), class: 'btn'
+  = link_to 'Delete', [:admin, @page], confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger'

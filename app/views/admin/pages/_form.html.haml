@@ -1,0 +1,32 @@
+= simple_form_for([:admin, @page], html: { class: 'form-horizontal' }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name, hint: 'Used to find the page'
+    = f.input :title
+    = f.input :link, hint: 'Set as title if left blank', label: 'Link text'
+    = f.input :url
+
+    .control-group.page-parts{ data: { fields: page_part_fields(f) } }
+      .controls
+        %ul.nav.nav-tabs
+          - @page.page_parts.each do |page_part|
+            %li{ class: ('active' if page_part == @page.page_parts.first) }
+              = link_to "##{page_part.name.parameterize}", 'data-toggle' => 'tab', id: "tab_#{page_part.name.parameterize}" do
+                = page_part.name
+                %i.icon-remove-sign.remove-page-part
+          %li
+            %a#add-page-part{ href: '' }
+              %i.icon-plus-sign
+
+    .tab-content
+      = f.simple_fields_for :page_parts do |p|
+        .tab-pane.fade{ id: "#{p.object.name.parameterize}", class: ('active in' if @page.page_parts.first == p.object) }
+          = render 'page_part_fields', f: p
+
+    = f.input :display_in_menu
+    = f.input :status, collection: Page.statuses.collect{ |k,v| [v,k] }, include_blank: false
+    = f.association :controller_actions, collection: @page.controller_actions + @controller_actions
+    = f.input :parent_id, as: :hidden
+
+  = f.button :wrapped, cancel: admin_pages_path

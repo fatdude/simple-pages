@@ -1,0 +1,13 @@
+- if @page
+  .page-header
+    %h1= @page.title
+
+  = textilize(@page.content)
+
+- else
+  
+  .page-header
+    %h1 Oh noes!
+
+  .hero-unit
+    %h1 Missing pages makes us sad :'(
