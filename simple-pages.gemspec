@@ -7,17 +7,16 @@ require "simple-pages/version"
 Gem::Specification.new do |s|
   s.name        = "simple-pages"
   s.version     = SimplePages::VERSION
-  s.authors     = ['Mark Asson']
-  s.email       = ['mark@fatdude.net']
-  # s.homepage    = "na"
-  s.summary     = "Simple CMS for twitter bootstrap based apps"
-  s.description = "Description of SimplePages."
+  s.authors     = ["TODO: Your name"]
+  s.email       = ["TODO: Your email"]
+  s.homepage    = "TODO"
+  s.summary     = "TODO: Summary of SimplePages."
+  s.description = "TODO: Description of SimplePages."
 
-  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.markdown"]
+  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.3"
-  s.add_dependency "ancestry"
   # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
