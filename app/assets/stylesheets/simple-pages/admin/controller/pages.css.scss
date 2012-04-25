@@ -14,7 +14,6 @@ body.pages {
       li div {
         padding: 4px;
         border: solid 1px #ddd;
-        @include border-radius();
         margin-bottom: 4px;
         position: relative;
 

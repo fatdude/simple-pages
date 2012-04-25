@@ -1,4 +1,15 @@
-# desc "Explaining what the task does"
-# task :simple-pages do
-#   # Task goes here
-# end
+namespace :db do
+  namespace :populate do
+    desc 'Populate the controller and actions table'
+    task controller_actions: :environment do
+      ControllerAction.delete_all
+
+      controller_actions = Rails.application.routes.routes.map(&:requirements)      
+      controller_actions.delete_if { |c| c.empty? || c[:controller] == 'rails/info' || c[:controller] == 'pages' || c[:controller] =~ /admin/ }
+
+      controller_actions.each do |ca|
+        ControllerAction.create(ca)
+      end
+    end
+  end  
+end
