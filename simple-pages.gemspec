@@ -7,13 +7,13 @@ require "simple-pages/version"
 Gem::Specification.new do |s|
   s.name        = "simple-pages"
   s.version     = SimplePages::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of SimplePages."
-  s.description = "TODO: Description of SimplePages."
+  s.authors     = ["Mark Asson"]
+  s.email       = ["mark@fatdude.net"]
+  s.homepage    = "http://kissmyfuckingarse.com"
+  s.summary     = "Summary of SimplePages."
+  s.description = "Description of SimplePages."
 
-  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.markdown"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.3"
