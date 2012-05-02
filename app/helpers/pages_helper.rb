@@ -1,6 +1,6 @@
 module PagesHelper
   def navigation(root)
-    pages = Page.find_by_name(root).subtree.published.includes(:controller_actions).to_depth(2).arrange(order: 'position asc')
+    pages = Page.find_by_name(root).subtree.displayed_in_menu.published.includes(:controller_actions).to_depth(2).arrange(order: 'position asc')
 
     pages.map do |page, sub_pages|
       content_tag :ul, class: 'nav' do 
