@@ -1,6 +1,10 @@
 //= require_self
 //= require jquery.ui.nestedSortable
 //= require codemirror
+//= require codemirror/modes/xml
+//= require codemirror/modes/javascript
+//= require codemirror/modes/css
+//= require codemirror/modes/htmlmixed
 //= require showdown
 //= require jquery.markedit
 //= require_tree ./simple-pages

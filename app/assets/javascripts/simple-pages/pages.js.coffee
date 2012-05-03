@@ -75,7 +75,8 @@ add_html = (id) ->
   CodeMirror.fromTextArea document.getElementById(id),
     lineNumbers: true
     matchBrackets: true
-    mode: "htmlmixed"
+    mode: 'text/html'
+    theme: 'default'
   $('#' + id).data('filter', 'html').next().addClass('span10')
 
 add_markdown = (id) ->
