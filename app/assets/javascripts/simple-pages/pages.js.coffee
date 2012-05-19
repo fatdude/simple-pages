@@ -80,10 +80,13 @@ add_html = (id) ->
   $('#' + id).data('filter', 'html').next().addClass('span10')
 
 add_markdown = (id) ->
-  $('#' + id).markedit
+  textarea = $('#' + id)
+  span = textarea.attr('class').match(/span\d/)[0]
+
+  textarea.markedit
     postload: ->
-      $('#' + id).parent().addClass('span10')
-  $('#' + id).data('filter', 'markdown')
+      textarea.parent().addClass(span)
+  textarea.data('filter', 'markdown')
 
 add_css = (textarea) ->
   CodeMirror.fromTextArea document.getElementById(textarea.attr("id")),
