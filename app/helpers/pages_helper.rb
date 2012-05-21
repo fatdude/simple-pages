@@ -30,6 +30,10 @@ module PagesHelper
     end
   end
 
+  def page_content(part='body')
+    @page.content(part) if @page
+  end
+
   protected
 
     def nav_link(sub_pages)
