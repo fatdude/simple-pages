@@ -16,7 +16,7 @@ $ ->
     add_html($(textarea).attr('id'))  
 
   $('textarea.editor[data-filter="markdown"]').each (i, textarea) ->
-    add_markdown($(textarea).attr('id'))
+    add_markdown($(textarea).attr('id'))  
 
   $('ol.nested-sortable').nestedSortable
       disableNesting: 'no-nest'
@@ -31,6 +31,8 @@ $ ->
       tabSize: 25
       tolerance: 'pointer'
       toleranceElement: '> div'
+      update: ->
+        $('#sortable-revert').fadeIn()    
 
   $('.save-positions').click ->
     serialized = $('ol.nested-sortable').nestedSortable('serialize');
