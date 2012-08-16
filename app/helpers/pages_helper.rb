@@ -3,7 +3,7 @@ module PagesHelper
     pages = Page.find_by_name(root).subtree.displayed_in_menu.published.includes(:controller_actions).to_depth(2).arrange(order: 'position asc')
 
     pages.map do |page, sub_pages|
-      content_tag :ul, class: 'nav' do 
+      content_tag :ul, class: 'nav' do
         nav_link(sub_pages)
       end
     end.join.html_safe
@@ -30,6 +30,23 @@ module PagesHelper
     end
   end
 
+  def page_url(page)
+    if page.url?
+      page.url
+    else
+      controller_action = page.controller_actions.first
+      if controller_action
+        url_for(controller: controller_action.controller, action: controller_action.action)
+      else
+        ''
+      end
+    end
+  end
+
+  def page_content name='body'
+    textilize @page.content
+  end
+
   protected
 
     def nav_link(sub_pages)
@@ -47,22 +64,9 @@ module PagesHelper
           link_url = page_url(page)
         end
 
-        content_tag :li, class: ('dropdown' if sub_pages.any?) do 
+        content_tag :li, class: ('dropdown' if sub_pages.any?) do
           link_to(link_text, link_url, options) + (sub_pages.any? ? content_tag(:ul, nav_link(sub_pages), class: 'dropdown-menu') : '')
         end
       end.join.html_safe
-    end
-
-    def page_url(page)
-      if page.url?
-        page.url
-      else
-        controller_action = page.controller_actions.first
-        if controller_action
-          url_for(controller: controller_action.controller, action: controller_action.action)
-        else
-          ''
-        end
-      end
     end
 end
