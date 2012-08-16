@@ -4,6 +4,20 @@
 
 $ ->
 
+  $('select.filter').on 'change', ->
+    textarea = $('#' + $(this).data('editor'))
+    remove_editor($(this).data('editor'))
+
+    switch $(this).val()
+      when '0' then add_markdown $(this).data('editor')
+      when '1' then add_html $(this).data('editor')
+
+  $('textarea.editor[data-filter="html"]').each (i, textarea) ->
+    add_html($(textarea).attr('id'))  
+
+  $('textarea.editor[data-filter="markdown"]').each (i, textarea) ->
+    add_markdown($(textarea).attr('id'))
+
   $('ol.nested-sortable').nestedSortable
       disableNesting: 'no-nest'
       forcePlaceholderSize: true
@@ -50,9 +64,45 @@ $ ->
     false
 
   $('.remove-page-part').click ->
-    target = $(this).parent().attr('href')
-    $(target + ' .destroy-page-part').val(1)
-    $(this).parent().parent().fadeOut()
-    $(target).fadeOut 800, ->
-      console.debug $('.page-parts .nav-tabs li:visible').first()
-      $('.page-parts .nav-tabs li:visible').first().addClass('active')
+    if confirm 'Are you sure?'
+      target = $(this).parent().attr('href')
+      $(target + ' .destroy-page-part').val(1)
+      $(this).parent().parent().fadeOut()
+      $(target).fadeOut 800, ->
+        $('.page-parts .nav-tabs li:visible').first().addClass('active')
+
+add_html = (id) ->
+  CodeMirror.fromTextArea document.getElementById(id),
+    lineNumbers: true
+    matchBrackets: true
+    mode: 'text/html'
+    theme: 'default'
+  $('#' + id).data('filter', 'html').next().addClass('span10')
+
+add_markdown = (id) ->
+  $('#' + id).markedit
+    postload: ->
+      $('#' + id).parent().addClass('span10')
+  $('#' + id).data('filter', 'markdown')
+
+add_css = (textarea) ->
+  CodeMirror.fromTextArea document.getElementById(textarea.attr("id")),
+    lineNumbers: true
+    matchBrackets: true
+    mode: "css"
+
+add_javascript = (textarea) ->
+  CodeMirror.fromTextArea document.getElementById(textarea.attr("id")),
+    lineNumbers: true
+    matchBrackets: true
+    mode: "javascript"
+
+remove_editor = (id) ->
+  textarea = $('#' + id)
+
+  switch textarea.data('filter')
+    when 'html' then textarea.show().next().remove()
+    when 'markdown'
+      parent = textarea.parent().parent()
+      textarea.show().appendTo(parent)
+      textarea.prev().remove()
