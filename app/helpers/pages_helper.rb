@@ -44,7 +44,7 @@ module PagesHelper
   end
 
   def page_content name='body'
-    textilize @page.content
+    textilize @page.try(:content)
   end
 
   protected
