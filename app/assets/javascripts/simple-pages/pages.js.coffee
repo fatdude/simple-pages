@@ -13,15 +13,15 @@ $ ->
       when '1' then add_html $(this).data('editor')
 
   $('textarea.editor[data-filter="html"]').each (i, textarea) ->
-    add_html($(textarea).attr('id'))  
+    add_html($(textarea).attr('id'))
 
   $('textarea.editor[data-filter="markdown"]').each (i, textarea) ->
-    add_markdown($(textarea).attr('id'))  
+    add_markdown($(textarea).attr('id'))
 
   $('ol.nested-sortable').nestedSortable
       disableNesting: 'no-nest'
       forcePlaceholderSize: true
-      handle: 'div'
+      handle: 'i.icon-reorder'
       helper: 'clone'
       items: 'li'
       maxLevels: 0
@@ -32,7 +32,7 @@ $ ->
       tolerance: 'pointer'
       toleranceElement: '> div'
       update: ->
-        $('#sortable-revert').fadeIn()    
+        $('#sortable-revert').fadeIn()
 
   $('.save-positions').click ->
     serialized = $('ol.nested-sortable').nestedSortable('serialize');
@@ -48,20 +48,20 @@ $ ->
     name = prompt('New page part name').replace(/[^a-z0-9\-_]+/ig, '-')
 
     if name != ''
-      if $('#' + name).length == 0        
-        new_id = new Date().getTime()        
+      if $('#' + name).length == 0
+        new_id = new Date().getTime()
         content = $('.page-parts').data('fields').replace(/new_page_parts/g, new_id)
 
         $('.in, .active').removeClass('in active')
-        $('.tab-content').append('<div class="tab-pane fade in active" id="' + name + '">' + content + '</div>')  
+        $('.tab-content').append('<div class="tab-pane fade in active" id="' + name + '">' + content + '</div>')
         $('#' + name + ' input:first').val(name)
         $(this).parent().before('<li><a href="' + name + '" data-toggle="tab" id="tab_' + name + '">' + name + '<i class="icon-remove-sign remove-page-part"></i></a></li>')
         $('#' + name + ' textarea').markedit()
         $('#tab_' + name).tab('show')
-      else 
-        alert('Name already exists') 
+      else
+        alert('Name already exists')
     else
-      alert('You need to specify a name') 
+      alert('You need to specify a name')
 
     false
 

@@ -11,15 +11,22 @@ body.pages {
       padding: 0;
       margin: 0;
 
-      li div {
-        padding: 4px;
-        border: solid 1px #ddd;
-        margin-bottom: 4px;
-        position: relative;
+      li {
 
-        span.controls {
-          position: absolute;
-          right: 4px;
+        i.icon-reorder {
+          cursor: move;
+        }
+
+        div {
+          padding: 4px;
+          border: solid 1px #ddd;
+          margin-bottom: 4px;
+          position: relative;
+
+          span.controls {
+            position: absolute;
+            right: 4px;
+          }
         }
       }
 
