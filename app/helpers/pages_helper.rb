@@ -43,8 +43,15 @@ module PagesHelper
     end
   end
 
-  def page_content name='body'
-    textilize @page.try(:content)
+  def page_content(part='body')
+    if @page
+      page_part = @page.content(part)
+      if page_part.filter == 0
+        textilize page_part.content
+      else
+        page_part.content
+      end
+    end
   end
 
   protected

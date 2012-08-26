@@ -6,5 +6,9 @@
 %ol.nested-sortable
   = nested_pages @pages
 
-.form-actions
-  = link_to 'Save positions', '#', class: 'btn btn-primary save-positions'
+- if @pages.any?
+  .form-actions
+    = link_to('Update positions', '#', :id => 'update_page_positions', :class => 'btn btn-primary')  
+    %span#sortable-revert.hide
+      or 
+      = link_to 'Revert positions', admin_pages_path, :class => 'btn'

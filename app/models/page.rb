@@ -27,7 +27,7 @@ class Page < ActiveRecord::Base
   end
 
   def content(name = 'body')
-    self.page_parts.detect { |page_part| page_part.name == name }.try(:content)
+    self.page_parts.detect { |page_part| page_part.name == name }
   end
 
   class << self
