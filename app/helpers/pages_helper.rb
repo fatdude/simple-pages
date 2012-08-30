@@ -45,7 +45,7 @@ module PagesHelper
 
   def page_content(part='body')
     if @page
-      page_part = @page.content(part)
+      page_part = @page.content(part.to_s)
       if page_part.filter == 0
         textilize page_part.content
       else
