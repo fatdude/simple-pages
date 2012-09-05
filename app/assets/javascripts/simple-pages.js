@@ -1,4 +1,3 @@
-//= require_self
 //= require jquery.ui.nestedSortable
 //= require codemirror
 //= require codemirror/modes/xml

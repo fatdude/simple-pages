@@ -12,10 +12,10 @@ $ ->
       when '0' then add_markdown $(this).data('editor')
       when '1' then add_html $(this).data('editor')
 
-  $('textarea.editor[data-filter="html"]').each (i, textarea) ->
+  $('textarea.simple-pages-editor[data-filter="html"]').each (i, textarea) ->
     add_html($(textarea).attr('id'))
 
-  $('textarea.editor[data-filter="markdown"]').each (i, textarea) ->
+  $('textarea.simple-pages-editor[data-filter="markdown"]').each (i, textarea) ->
     add_markdown($(textarea).attr('id'))
 
   $('ol.nested-sortable').nestedSortable
