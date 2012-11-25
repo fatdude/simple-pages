@@ -6,4 +6,5 @@
 //= require codemirror/modes/htmlmixed
 //= require showdown
 //= require jquery.markedit
+//= require bootstrap-wysihtml5-all
 //= require_tree ./simple-pages

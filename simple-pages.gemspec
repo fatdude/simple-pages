@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = SimplePages::VERSION
   s.authors     = ["Mark Asson"]
   s.email       = ["mark@fatdude.net"]
-  s.homepage    = "http://kissmyfuckingarse.com"
+  s.homepage    = "https://github.com/fatdude/simple-pages"
   s.summary     = "Summary of SimplePages."
   s.description = "Description of SimplePages."
 
@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.3"
   s.add_dependency "ancestry"
   s.add_dependency "codemirror-rails"
+  s.add_dependency "bootstrap-wysihtml5-rails"
   s.add_development_dependency "sqlite3"
 end

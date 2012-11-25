@@ -46,10 +46,12 @@ module PagesHelper
   def page_content(part='body')
     if @page
       page_part = @page.content(part.to_s)
-      if page_part.filter == 0
-        textilize page_part.content
-      else
-        page_part.content
+      if page_part
+        if page_part.filter == 0
+          sanitize page_part.content, tags: %w{ b i ul li ol blockquote u }
+        else
+          page_part.content
+        end
       end
     end
   end
