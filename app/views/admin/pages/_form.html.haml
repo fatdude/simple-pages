@@ -34,6 +34,6 @@
       .tab-content
         = f.simple_fields_for :page_parts do |p|
           .tab-pane.fade{ id: "#{p.object.name.parameterize}", class: ('active in' if @page.page_parts.first == p.object) }
-          = render 'page_part_fields', f: p
+            = render 'page_part_fields', f: p
 
   = f.button :wrapped, cancel: admin_pages_path

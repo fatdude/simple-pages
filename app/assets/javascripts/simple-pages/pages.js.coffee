@@ -9,14 +9,14 @@ $ ->
     remove_editor($(this).data('editor'))
 
     switch $(this).val()
-      when '0' then add_markdown $(this).data('editor')
+      when '0' then add_wysiwyg $(this).data('editor')
       when '1' then add_html $(this).data('editor')
 
   $('textarea.simple-pages-editor[data-filter="html"]').each (i, textarea) ->
     add_html($(textarea).attr('id'))
 
-  $('textarea.simple-pages-editor[data-filter="markdown"]').each (i, textarea) ->
-    add_markdown($(textarea).attr('id'))
+  $('textarea.simple-pages-editor[data-filter="wysiwyg"]').each (i, textarea) ->
+    add_wysiwyg($(textarea).attr('id'))
 
   $('ol.nested-sortable').nestedSortable
       disableNesting: 'no-nest'
@@ -81,7 +81,7 @@ add_html = (id) ->
     theme: 'default'
   $('#' + id).data('filter', 'html').next().addClass('span10')
 
-add_markdown = (id) ->
+add_wysiwyg = (id) ->
   textarea = $('#' + id)
   span = textarea.attr('class').match(/span\d/)[0]
 
@@ -95,7 +95,7 @@ add_markdown = (id) ->
     "html": true # Button which allows you to edit the generated HTML. Default false
     "link": true # Button to insert a link. Default true
     "image": true # Button to insert an image. Default true
-  textarea.data('filter', 'markdown')
+  textarea.data('filter', 'wysiwyg')
 
 add_css = (textarea) ->
   CodeMirror.fromTextArea document.getElementById(textarea.attr("id")),
@@ -113,8 +113,9 @@ remove_editor = (id) ->
   textarea = $('#' + id)
 
   switch textarea.data('filter')
-    when 'html' then textarea.show().next().remove()
-    when 'markdown'
-      parent = textarea.parent().parent()
-      textarea.show().appendTo(parent)
-      textarea.prev().remove()
+    when 'html'
+      textarea.show().next().remove()
+    when 'wysiwyg'
+      parent = textarea.parent()
+      textarea.show()
+      parent.html textarea

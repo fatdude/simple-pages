@@ -48,7 +48,7 @@ module PagesHelper
       page_part = @page.content(part.to_s)
       if page_part
         if page_part.filter == 0
-          sanitize page_part.content, tags: %w{ b i ul li ol blockquote u }
+          sanitize page_part.content, tags: %w{ b i ul li ol blockquote u br }
         else
           page_part.content
         end
