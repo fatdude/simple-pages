@@ -94,11 +94,11 @@ class Admin::PagesController < ApplicationController
     i = 0
     params[:page].each do |id, parent_id|
       page = Page.find(id)
-      parent_id = parent_id == 'root' ? nil : parent_id
+      parent_id = parent_id == 'null' ? nil : parent_id
       page.update_attributes(parent_id: parent_id, position: i)
       i += 1
     end
-    
+
     render nothing: true
   end
 

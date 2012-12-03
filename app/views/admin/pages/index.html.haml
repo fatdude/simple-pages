@@ -8,7 +8,7 @@
 
 - if @pages.any?
   .form-actions
-    = link_to('Update positions', '#', :id => 'update_page_positions', :class => 'btn btn-primary')  
-    %span#sortable-revert.hide
-      or 
+    = link_to('Update positions', '#', :id => 'simple-pages-save-order', :class => 'btn btn-primary')
+    %span#simple-pages-revert-order.hide
+      or
       = link_to 'Revert positions', admin_pages_path, :class => 'btn'

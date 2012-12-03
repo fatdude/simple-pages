@@ -32,9 +32,9 @@ $ ->
       tolerance: 'pointer'
       toleranceElement: '> div'
       update: ->
-        $('#sortable-revert').fadeIn()
+        $('#simple-pages-revert-order').fadeIn()
 
-  $('.save-positions').click ->
+  $('#simple-pages-save-order').click ->
     serialized = $('ol.nested-sortable').nestedSortable('serialize');
     console.debug serialized
 
