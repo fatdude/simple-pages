@@ -21,7 +21,7 @@
     #content.tab-pane
       .control-group.page-parts{ data: { fields: page_part_fields(f) } }
         .controls
-          %ul.nav.nav-pills
+          %ul.nav.nav-tabs
             - @page.page_parts.each do |page_part|
               %li{ class: ('active' if page_part == @page.page_parts.first) }
                 = link_to "##{page_part.name.parameterize}", 'data-toggle' => 'tab', id: "tab_#{page_part.name.parameterize}" do

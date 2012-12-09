@@ -4,19 +4,19 @@
 
 $ ->
 
-  $('select.filter').on 'change', ->
+  $(document).on 'change', 'select.filter', ->
     textarea = $('#' + $(this).data('editor'))
-    remove_editor($(this).data('editor'))
+    remove_editor textarea
 
     switch $(this).val()
-      when '0' then add_wysiwyg $(this).data('editor')
-      when '1' then add_html $(this).data('editor')
+      when '0' then add_wysiwyg textarea
+      when '1' then add_html textarea
 
   $('textarea.simple-pages-editor[data-filter="html"]').each (i, textarea) ->
-    add_html($(textarea).attr('id'))
+    add_html $(textarea)
 
   $('textarea.simple-pages-editor[data-filter="wysiwyg"]').each (i, textarea) ->
-    add_wysiwyg($(textarea).attr('id'))
+    add_wysiwyg $(textarea)
 
   $('ol.nested-sortable').nestedSortable
       disableNesting: 'no-nest'
@@ -35,11 +35,8 @@ $ ->
         $('#simple-pages-revert-order').fadeIn()
 
   $('#simple-pages-save-order').click ->
-    serialized = $('ol.nested-sortable').nestedSortable('serialize');
-    console.debug serialized
-
     $.ajax
-      data: serialized
+      data: $('ol.nested-sortable').nestedSortable('serialize');
       dataType:'script'
       url: '/admin/pages/save_order'
       type: 'put'
@@ -51,12 +48,10 @@ $ ->
       if $('#' + name).length == 0
         new_id = new Date().getTime()
         content = $('.page-parts').data('fields').replace(/new_page_parts/g, new_id)
-
-        $('.in, .active').removeClass('in active')
-        $('.tab-content').append('<div class="tab-pane fade in active" id="' + name + '">' + content + '</div>')
+        $(this).parent().before('<li><a href="#' + name + '" data-toggle="tab" id="tab_' + name + '">' + name + '<i class="icon-remove-sign remove-page-part"></i></a></li>')
+        $('#content .tab-content').append('<div class="tab-pane fade in active" id="' + name + '">' + content + '</div>')
         $('#' + name + ' input:first').val(name)
-        $(this).parent().before('<li><a href="' + name + '" data-toggle="tab" id="tab_' + name + '">' + name + '<i class="icon-remove-sign remove-page-part"></i></a></li>')
-        $('#' + name + ' textarea').markedit()
+        add_wysiwyg $('#' + name + ' textarea')
         $('#tab_' + name).tab('show')
       else
         alert('Name already exists')
@@ -73,21 +68,15 @@ $ ->
       $(target).fadeOut 800, ->
         $('.page-parts .nav-tabs li:visible').first().addClass('active')
 
-add_html = (id) ->
-  CodeMirror.fromTextArea document.getElementById(id),
+add_html = (textarea) ->
+  CodeMirror.fromTextArea document.getElementById(textarea.attr("id")),
     lineNumbers: true
     matchBrackets: true
     mode: 'text/html'
     theme: 'default'
-  $('#' + id).data('filter', 'html').next().addClass('span10')
+  textarea.data('filter', 'html')
 
-add_wysiwyg = (id) ->
-  textarea = $('#' + id)
-  span = textarea.attr('class').match(/span\d/)[0]
-
-  # textarea.markedit
-  #   postload: ->
-  #     textarea.parent().addClass(span)
+add_wysiwyg = (textarea) ->
   textarea.wysihtml5
     "font-styles": false # Font styling, e.g. h1, h2, etc. Default true
     "emphasis": true # Italics, bold, etc. Default true
@@ -109,9 +98,7 @@ add_javascript = (textarea) ->
     matchBrackets: true
     mode: "javascript"
 
-remove_editor = (id) ->
-  textarea = $('#' + id)
-
+remove_editor = (textarea) ->
   switch textarea.data('filter')
     when 'html'
       textarea.show().next().remove()
