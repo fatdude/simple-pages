@@ -11,7 +11,7 @@ class PagePart < ActiveRecord::Base
     end
 
     def filters
-      { 0 => 'Markdown', 1 => 'HTML' }
+      { 0 => 'WYSIWYG', 1 => 'HTML' }
     end
 
   end

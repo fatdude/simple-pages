@@ -1,4 +1,4 @@
-//= require jquery.ui.nestedSortable
+//= require jquery.mjs.nestedSortable
 //= require codemirror
 //= require codemirror/modes/xml
 //= require codemirror/modes/javascript
