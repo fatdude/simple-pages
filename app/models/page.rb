@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  attr_accessible :ancestry, :display_in_menu, :link, :status, :title, :url, :parent_id, :controller_action_ids, :page_parts_attributes, :name, :position
+  attr_accessible :ancestry, :display_in_menu, :link, :status, :title, :url, :parent_id, :controller_action_ids, :page_parts_attributes, :name, :position, :css, :js
   has_ancestry orphan_strategy: :rootify, cache_depth: true
 
   # Filters

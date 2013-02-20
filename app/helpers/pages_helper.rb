@@ -56,6 +56,18 @@ module PagesHelper
     end
   end
 
+  def page_css
+    if @page
+      "<style>#{@page.css}</style>".html_safe
+    end
+  end
+
+  def page_js
+    if @page
+      "<script type=\"text/javascript\">#{@page.js}</script>".html_safe
+    end
+  end
+
   protected
 
     def nav_link(sub_pages)

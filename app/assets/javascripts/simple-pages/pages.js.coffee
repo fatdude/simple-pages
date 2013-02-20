@@ -68,6 +68,29 @@ $ ->
       $(target).fadeOut 800, ->
         $('.page-parts .nav-tabs li:visible').first().addClass('active')
 
+  if $('#page_css')
+    css = CodeMirror.fromTextArea document.getElementById('page_css'),
+      lineNumbers: true
+      matchBrackets: true
+      mode: 'css'
+      theme: 'default'
+
+  if $('#page_css')
+    javascript = CodeMirror.fromTextArea document.getElementById('page_js'),
+      lineNumbers: true
+      matchBrackets: true
+      mode: 'css'
+      theme: 'default'
+
+  $('.pages a[data-toggle="tab"]').on "shown", (e) ->
+    id = $(e.target).attr("href")
+    switch id
+      when "#css"
+        css.refresh()
+      when "#javascript"
+        javascript.refresh()
+
+
 add_html = (textarea) ->
   CodeMirror.fromTextArea document.getElementById(textarea.attr("id")),
     lineNumbers: true

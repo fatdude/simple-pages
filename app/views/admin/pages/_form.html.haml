@@ -4,6 +4,8 @@
   %ul.nav.nav-tabs
     %li.active= link_to 'Details', '#details', data: { toggle: 'tab' }
     %li= link_to 'Content', '#content', data: { toggle: 'tab' }
+    %li= link_to 'CSS', '#css', data: { toggle: 'tab' }
+    %li= link_to 'Javascript', '#javascript', data: { toggle: 'tab' }
 
   .tab-content
     #details.tab-pane.active
@@ -35,5 +37,11 @@
         = f.simple_fields_for :page_parts do |p|
           .tab-pane.fade{ id: "#{p.object.name.parameterize}", class: ('active in' if @page.page_parts.first == p.object) }
             = render 'page_part_fields', f: p
+
+    #css.tab-pane
+      = f.input :css, input_html: { class: 'span9' }, label: 'CSS'
+
+    #javascript.tab-pane
+      = f.input :js, input_html: { class: 'span9' }, label: 'Javascript'
 
   = f.button :wrapped, cancel: admin_pages_path
