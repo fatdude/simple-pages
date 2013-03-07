@@ -1,5 +1,5 @@
 //= require jquery.mjs.nestedSortable
-//= require codemirror
+//= require codemirror/codemirror
 //= require codemirror/modes/xml
 //= require codemirror/modes/javascript
 //= require codemirror/modes/css

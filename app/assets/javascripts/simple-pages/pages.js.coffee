@@ -34,14 +34,16 @@ $ ->
       update: ->
         $('#simple-pages-revert-order').fadeIn()
 
-  $('#simple-pages-save-order').click ->
+  $('#simple-pages-save-order').click (e) ->
     $.ajax
       data: $('ol.nested-sortable').nestedSortable('serialize');
       dataType:'script'
       url: '/admin/pages/save_order'
       type: 'put'
 
-  $('#add-page-part').click ->
+    e.preventDefault()
+
+  $('#add-page-part').click (e) ->
     name = prompt('New page part name').replace(/[^a-z0-9\-_]+/ig, '-')
 
     if name != ''
@@ -58,9 +60,9 @@ $ ->
     else
       alert('You need to specify a name')
 
-    false
+    e.preventDefault()
 
-  $('.remove-page-part').click ->
+  $('.remove-page-part').click (e) ->
     if confirm 'Are you sure?'
       target = $(this).parent().attr('href')
       $(target + ' .destroy-page-part').val(1)
@@ -68,14 +70,16 @@ $ ->
       $(target).fadeOut 800, ->
         $('.page-parts .nav-tabs li:visible').first().addClass('active')
 
-  if $('#page_css')
+    e.preventDefault()
+
+  if $('#page_css').length > 0
     css = CodeMirror.fromTextArea document.getElementById('page_css'),
       lineNumbers: true
       matchBrackets: true
       mode: 'css'
       theme: 'default'
 
-  if $('#page_css')
+  if $('#page_js').length > 0
     javascript = CodeMirror.fromTextArea document.getElementById('page_js'),
       lineNumbers: true
       matchBrackets: true

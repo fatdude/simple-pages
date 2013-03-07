@@ -1,4 +1,4 @@
 = f.input :name
 = f.input :filter, collection: PagePart.filters.collect { |k,v| [v, k] }, include_blank: false, input_html: { class: 'filter', data: { editor: "page-part-content-#{f.object.name.try(:parameterize)}" } }
-= f.input :content, input_html: { id: "page-part-content-#{f.object.name.try(:parameterize)}", class: 'span9 simple-pages-editor', data: { filter: PagePart.filters[f.object.filter].downcase } }
+= f.input :content, input_html: { id: "page-part-content-#{f.object.name.try(:parameterize)}", class: 'span9 simple-pages-editor', data: { filter: PagePart.filters[f.object.filter].try(:downcase) } }
 = f.input :_destroy, as: :hidden, input_html: { class: 'destroy-page-part' }

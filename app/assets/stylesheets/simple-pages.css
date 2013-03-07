@@ -1,6 +1,5 @@
 /*
- *= require codemirror
- *= require jquery.markedit
+ *= require codemirror/codemirror
  *= require bootstrap-wysihtml5
  *= require simple-pages/admin/controller/pages
 */
