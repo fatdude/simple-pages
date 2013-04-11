@@ -16,6 +16,7 @@
         = f.input :link, hint: 'Set as title if left blank', label: 'Link text'
         = f.input :url
         = f.input :display_in_menu
+        = f.input :linkable, hint: 'Should the link to this page in the breadcrumbs be clickable?'
         = f.input :status, collection: Page.statuses.collect{ |k,v| [v,k] }, include_blank: false
         = f.association :controller_actions, collection: @page.controller_actions + @controller_actions
         = f.input :parent_id, as: :hidden

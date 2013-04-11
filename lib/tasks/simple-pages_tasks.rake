@@ -6,9 +6,14 @@ namespace :db do
       controller_actions.delete_if { |c| c.empty? || c[:controller] == 'rails/info' || c[:controller] == 'pages' || c[:controller] =~ /admin/ }
 
       controller_actions.each do |ca|
-        puts ca
         begin
-          ControllerAction.where(controller: ca[:controller], action: ca[:action]).first_or_create
+          controller_action = ControllerAction.where(controller: ca[:controller], action: ca[:action]).first_or_initialize
+          if controller_action.persisted?
+            puts "#{ca[:controller]} - #{ca[:action]}: ControllerAction already exists"
+          else
+            puts "Added: #{ca}"
+            controller_action.save
+          end
         rescue Exception => e
           puts e
           puts ca

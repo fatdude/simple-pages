@@ -25,7 +25,12 @@ module PagesHelper
       content_tag :ul, class: 'breadcrumb' do
         breadcrumbs.map do |page|
           content_tag :li, class: ('active' if page == breadcrumbs.last) do
-            page == breadcrumbs.last ? page.link : link_to(page.link, page_url(page)) + content_tag(:span, '/', class: 'divider')
+            if page == breadcrumbs.last
+              page.link
+            else
+              (page.linkable ? link_to(page.link, page_url(page)) : page.link).html_safe + content_tag(:span, '/', class: 'divider')
+            end
+
           end
         end.join.html_safe
       end
@@ -82,7 +87,7 @@ module PagesHelper
         link_text, link_url = ''
 
         if relative_depth == 1
-          active = page.id == @page.try(:id) || page.descendant_ids.include?(@page.try(:id))
+          active = page.id == @page.try(:id) || page.descendant_ids.include?(@page.try(:id)) || page.link.gsub(/\?.*/, '') == request.fullpath
         end
 
         if sub_pages.any?
