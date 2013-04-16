@@ -9,6 +9,6 @@ class << ActionController::Base
     # Include dynamic class methods
     extend SimplePages::ClassMethods
 
-    before_filter :get_page, if: lambda { request.format.html? }, unless: lambda { request.params[:controller] =~ /admin\// }
+    before_filter :get_page, if: lambda { request.format.html? || request.format == '*/*' }, unless: lambda { request.params[:controller] =~ /admin\// }
   end
 end
