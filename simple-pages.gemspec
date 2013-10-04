@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.markdown"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.3"
+  s.add_dependency "rails"
   s.add_dependency "ancestry"
   s.add_dependency "codemirror-rails"
   s.add_dependency "bootstrap-wysihtml5-rails"
